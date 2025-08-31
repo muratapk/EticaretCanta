@@ -1,6 +1,7 @@
 using EticaretCanta.Data;
 using EticaretCanta.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace EticaretCanta.Controllers
@@ -26,8 +27,19 @@ namespace EticaretCanta.Controllers
         }
         public async Task<IActionResult> Product_Details(int ? id)
         {
-            var product_List=_context.Products.FirstOrDefault(p => p.Product_Id == id);
-            return View(product_List);
+            //var product_List=_context.Products.FirstOrDefault(p => p.Product_Id == id);
+            var product_List=await _context.Products.Include(p=>p.Category).Include(p=>p.Sub_Category).Include(p => p.Pictures).FirstOrDefaultAsync(p => p.Product_Id == id);
+
+            if (product_List == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new ProductWithPictures
+            {
+                Product = product_List,
+                Pictures = product_List.Pictures.ToList()
+            };
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
