@@ -12,7 +12,7 @@
         </div>
         @foreach(var item in Model)
         {
-            <a href="" class="nav-item nav-link">@item.Category_Name</a>
+            <a asp-controller="Home" asp-action="Category_details" asp-route-id="@item.Category_Id" class="nav-item nav-link">@item.Category_Name</a>
         }
        
        
