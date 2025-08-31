@@ -47,5 +47,20 @@ namespace EticaretCanta.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public async Task<IActionResult>Category_details(int id)
+        {
+            if(id == 0 || _context.Categories == null)
+            {
+                var product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).ToListAsync();
+                return View(product_List);
+            }
+            else
+            {
+                var product_List =await  _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).Where(p => p.Category_Id == id).ToListAsync();
+                return View(product_List);
+            }
+            return View();
+            
+        }
     }
 }
