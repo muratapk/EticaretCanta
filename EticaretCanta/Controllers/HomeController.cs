@@ -49,7 +49,11 @@ namespace EticaretCanta.Controllers
         }
         public async Task<IActionResult>Category_details(int id)
         {
-            if(id == 0 || _context.Categories == null)
+            int pageSize = 9;
+          
+
+
+            if (id == 0 || _context.Categories == null)
             {
                 var product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).ToListAsync();
                 return View(product_List);
