@@ -3,6 +3,7 @@ using EticaretCanta.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Linq;
 
 namespace EticaretCanta.Controllers
 {
@@ -65,6 +66,85 @@ namespace EticaretCanta.Controllers
             }
             return View();
             
+        }
+        public async Task<IActionResult>Category_Jdetails(int id)
+        {
+            List<Products>product_List=new List<Products>();
+            //burada ürün listesi olarak tanýmlama yap product_List
+            if (id == 0 || _context.Categories == null)
+            {
+                 product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).ToListAsync();
+                
+            }
+            else
+            {
+                 product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).Where(p => p.Category_Id == id).ToListAsync();
+                
+            }
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("~/Views/Shared/Partials/_CategoryProductList.cshtml",product_List);
+            }
+
+            return View(product_List);
+        }
+        public async Task<IActionResult> Category_keydetails(string q)
+        {
+            List<Products> product_List = new List<Products>();
+            //burada ürün listesi olarak tanýmlama yap product_List
+            if (String.IsNullOrEmpty(q))
+            {
+                product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).ToListAsync();
+
+            }
+            else
+            {
+                product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category)
+    .Include(p => p.Pictures).Where(p =>p.Name.Contains(q) ||p.Code.Contains(q) || p.Category.Category_Name.Contains(q)
+    ).ToListAsync();
+
+            }
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("~/Views/Shared/Partials/_CategoryProductList.cshtml", product_List);
+            }
+
+            return View(product_List);
+        }
+        public async Task<IActionResult> Category_sortdetails(int q)
+        {
+            List<Products> product_List = new List<Products>();
+            //burada ürün listesi olarak tanýmlama yap product_List
+            if (q==0 && q==null)
+            {
+                product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category).Include(p => p.Pictures).ToListAsync();
+
+            }
+            else
+            {
+                if(q== 1)
+                {
+                    product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category)
+    .Include(p => p.Pictures).OrderBy(p => p.Price).ToListAsync();
+                }
+                if(q == 2  )
+                {
+                    product_List = await _context.Products.Include(p => p.Category).Include(p => p.Sub_Category)
+    .Include(p => p.Pictures).OrderByDescending(p => p.Price).ToListAsync();
+                }
+                
+                
+
+            }
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("~/Views/Shared/Partials/_CategoryProductList.cshtml", product_List);
+            }
+
+            return View(product_List);
         }
     }
 }
