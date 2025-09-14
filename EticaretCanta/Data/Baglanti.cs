@@ -1,9 +1,10 @@
 ﻿using EticaretCanta.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EticaretCanta.Data
 {
-    public class Baglanti : DbContext
+    public class Baglanti :IdentityDbContext<AppUser, AppRole, int>
     {
         public Baglanti(DbContextOptions<Baglanti> options):base(options)
         {
@@ -14,6 +15,8 @@ namespace EticaretCanta.Data
         public DbSet<Pictures> Pictures { get; set; } = null!;  
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Categories>()
                 .HasMany(c => c.Sub_Categories)
                 .WithOne(s => s.Category)

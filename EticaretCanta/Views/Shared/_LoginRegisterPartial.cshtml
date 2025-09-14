@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+@if(SignInManager.IsSignedIn(User))
+{
+    <div class="navbar-nav ml-auto py-0">
+        <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Hesabım:@User.Identity.Name</a>
+        <a href="/Logout/Index" class="nav-item nav-link">Güvenli Çıkış</a>
+    </div>
+}
+else
+{
+    <div class="navbar-nav ml-auto py-0">
+        <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Login</a>
+        <a href="/Register/Index" class="nav-item nav-link">Register</a>
+    </div>
+}
+
+
