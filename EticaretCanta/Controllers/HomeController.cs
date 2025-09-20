@@ -48,6 +48,10 @@ namespace EticaretCanta.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult Error404()
+        {
+            return View("NotFound");
+        }
         public async Task<IActionResult>Category_details(int id)
         {
             int pageSize = 9;

@@ -1,0 +1,33 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Kullanıcı Email</th>
+            <th>Kullanıcı Şehir</th>
+            <th>Kullanıcı Rolü</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.Email</td>
+                <td>@user.City</td>
+                <td>
+                    <a href="@Url.Action("EditRole","Admin",new {id=user.Id})" class="btn btn-primary">Rol Ekle/Değiştir</a>
+
+                </td>
+            </tr>
+        }
+   
+    </tbody>
+</table>
+

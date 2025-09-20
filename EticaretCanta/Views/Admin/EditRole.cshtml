@@ -1,0 +1,18 @@
+﻿@model EticaretCanta.ViewModel.EditUserRoleViewModel
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>EditRole</h1>
+<form asp-action="EditRole" method="post">
+    <input type="hidden" asp-for="UserId"/>
+    <div class="form-group">
+        <label>Rol Seçimi Yapınız</label>
+        <select asp-for="SelectRole" class="form-control" asp-items="new SelectList(Model.AllRoles)">
+            <option value="">Seçim Yapınız</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Düzenle" />
+</form>
+

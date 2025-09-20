@@ -46,10 +46,20 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+    if(response.StatusCode==404)
+    {
+        response.Redirect("/Home/Error404");
+    }
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

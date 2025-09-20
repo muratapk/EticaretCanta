@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EticaretCanta.Data;
 using EticaretCanta.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EticaretCanta.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly Baglanti _context;
-
+       
         public ProductsController(Baglanti context)
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: Products
         public async Task<IActionResult> Index()
         {
