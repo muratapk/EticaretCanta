@@ -53,12 +53,12 @@ namespace EticaretCantaApi.Controllers
             return result;
         }
         [HttpPost("id")]
-        public async Task<ActionResult> AddCategory(Categories categories)
+        public async Task<ActionResult> AddCategory([FromBody]Categories categories)
         {
              _context.Categories.Add(categories);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return CreatedAtAction(nameof(GetCategory), new { Id = categories.Category_Id }, categories);
         }
     }
 }
