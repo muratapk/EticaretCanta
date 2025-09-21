@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EticaretCanta", "EticaretCanta\EticaretCanta.csproj", "{74CF5F4B-5F46-4E0D-82C2-A49635D95B51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EticaretCantaApi", "EticaretCantaApi\EticaretCantaApi.csproj", "{5A7E7369-A62E-44F7-BD44-BE26AF0C20B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{74CF5F4B-5F46-4E0D-82C2-A49635D95B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74CF5F4B-5F46-4E0D-82C2-A49635D95B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74CF5F4B-5F46-4E0D-82C2-A49635D95B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7E7369-A62E-44F7-BD44-BE26AF0C20B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7E7369-A62E-44F7-BD44-BE26AF0C20B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7E7369-A62E-44F7-BD44-BE26AF0C20B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7E7369-A62E-44F7-BD44-BE26AF0C20B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

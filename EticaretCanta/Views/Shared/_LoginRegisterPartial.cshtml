@@ -6,7 +6,7 @@
 @if(SignInManager.IsSignedIn(User))
 {
     <div class="navbar-nav ml-auto py-0">
-        <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Hesabım:@User.Identity.Name</a>
+        <a asp-action="Index" asp-controller="Main" class="nav-item nav-link">Hesabım:@User.Identity.Name</a>
         <a href="/Logout/Index" class="nav-item nav-link">Güvenli Çıkış</a>
     </div>
 }
